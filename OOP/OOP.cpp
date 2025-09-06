@@ -14,7 +14,7 @@ public:
 	Person()
 	{
 		fullName = "Mohammad Abu hammad ";
-		cout<<"\nHi,I'm Ctor";
+		cout << "\nHi,I'm Ctor";
 	}
 
 	~Person() {
@@ -193,41 +193,30 @@ class ClsA {
 
 
 public:
-	int var;
 
-	static int counter;
-	ClsA()
-	{
-		counter++;
-	}
-	void Print() {
+	static int Funcation1() {
 
-		cout << "\nvar     =" << var << endl;
-		cout << "counter  =" << counter << endl;
+		return 10;
 
 	}
+
+	int Funcation2() {
+
+		return 20;
+
+	}
+
 };
 
-int ClsA::counter = 0; //static variable initalisation outside the class.
 
 int main()
 {
-	ClsA a ,a1, a2;
+	ClsA a, a1, a2;
 
-	a.var = 10;
-	a1.var = 20;
-	a2.var = 30;
-	
-	a.Print();
-	a1.Print();
-	a2.Print();
+	cout << ClsA::Funcation1() << endl;
 
-	/*a1.counter = 500;
-	cout << "\nAfter chaning the static memeber counter in one object: \n";
+	cout << a.Funcation1() << endl;
 
-	a.Print();
-	a1.Print();
-	a2.Print();*/
 	system("pause>0");
 };
 
