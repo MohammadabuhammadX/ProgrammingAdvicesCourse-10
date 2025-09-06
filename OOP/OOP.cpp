@@ -5,18 +5,9 @@ using namespace std;
 class Person {
 private:
 
-	int _userId = 1;
-
 	string _firstName;
-	string _lastName;
 
 public:
-
-	int getUserId() {
-
-		return _userId;
-
-	}
 
 	void setFirstName(string FirstName) {
 
@@ -24,28 +15,96 @@ public:
 
 	}
 
-	string firstName() {
+	string getFirstName() {
 
 		return _firstName;
 
 	}
 
-	void setLastName(string LastName) {
+	__declspec(property(get = getFirstName, put = setFirstName)) string FirstName;
 
-		_lastName = LastName;
+};
+
+class Calculator {
+
+private:
+
+	float _result = 0;
+	float _lastNumber = 0;
+	string _lastOperation = "Clear";
+	float _preivousResult = 0;
+
+	bool _isZero(float num)
+	{
+		return (num == 0);
+	}
+
+public:
+
+	void Add(float num) {
+
+		_lastNumber = num;
+		_preivousResult = _result;
+		_lastOperation = "Adding";
+		_result += num;
 
 	}
 
-	string getLastName() {
+	void Subtract(float num) {
+		_lastNumber = num;
+		_preivousResult = _result;
+		_lastOperation = "Subtracting";
+		_result -= num;
+	}
 
-		return _lastName;
+	void Divide(float num) {
+
+		_lastNumber = num;
+
+		if (_isZero(num)) {
+			num = 1;
+		}
+		_preivousResult = _result;
+		_lastOperation = "Dividing";
+		_result /= num;
+
+	}
+	void Multiply(int num) {
+
+		_lastNumber = num;
+		_lastOperation = "Multiplying";
+		_preivousResult = _result;
+		_result *= num;
 
 	}
 
-	string getFullName() {
+	float GetFinalReuslts() {
 
-		return _firstName + _lastName;
+		return _result;
 
+	}
+
+	void Clear() {
+
+		_lastNumber = 0;
+		_preivousResult = 0;
+		_lastOperation = "Clear";
+		_result = 0;
+
+	}
+
+	void CancelLastOperation() {
+
+		_lastNumber = 0;
+		_lastOperation = "Cancelling Last Operation";
+		_result = _preivousResult;
+
+	}
+
+	void PrintResult() {
+
+		cout << "Result ";
+		cout << "After " << _lastOperation << " " << _lastNumber << " is : " << _result << "\n";
 	}
 
 };
@@ -53,16 +112,32 @@ public:
 
 int main()
 {
+	Calculator Calc1;
 
-	Person Person1 , Person2;
-	
-	Person1.setFirstName("Mohammad");
-	Person1.setLastName(" AbuhMammad");
+	Calc1.Clear();
+	Calc1.PrintResult();
+
+	Calc1.Add(10);
+	Calc1.PrintResult();
+
+	Calc1.Add(100);
+	Calc1.PrintResult();
+
+	Calc1.Subtract(20);
+	Calc1.PrintResult();
 
 
-	cout << "User Id : " << Person1.getUserId() << endl;
-	cout << "First Name : " << Person1.firstName() << endl;
-	cout << "Last Name : " << Person1.getLastName() << endl;
-	cout << "Full Name : " << Person1.getFullName() << endl;
+	Calc1.Divide(0);
+	Calc1.PrintResult();
+
+	Calc1.Divide(2);
+	Calc1.PrintResult();
+
+	Calc1.Multiply(3);
+	Calc1.PrintResult();
+
+	Calc1.Clear();
+	Calc1.PrintResult();
+
 }
 
