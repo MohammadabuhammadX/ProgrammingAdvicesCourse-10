@@ -9,6 +9,17 @@ private:
 
 public:
 
+	string fullName;
+
+	Person()
+	{
+		fullName = "Mohammad Abu hammad ";
+		cout<<"\nHi,I'm Ctor";
+	}
+
+	~Person() {
+		cout << "\nHi, I'm Destrouctor";
+	}
 	void setFirstName(string FirstName) {
 
 		_firstName = FirstName;
@@ -109,35 +120,114 @@ public:
 
 };
 
+class Address {
+
+private:
+	string _AddressLine1;
+	string _AddressLine2;
+	string _POBox;
+	string _ZIPCode;
+public:
+
+	Address(string AddressLine1, string AddressLine2, string POBox, string ZipCode)
+	{
+		_AddressLine1 = AddressLine1;
+		_AddressLine2 = AddressLine2;
+		_POBox = POBox;
+		_ZIPCode = ZipCode;
+	}
+	//Copy Constructor
+	/*Address(Address& old_obj)
+	{
+		_AddressLine1 = old_obj.GetAddressLine1();
+		_AddressLine2 = old_obj.GetAddressLine2();
+		_POBox = old_obj.GetPOBox();
+		_ZIPCode = old_obj.GetZipCode();
+	}*/
+
+	void SetAddressLin1(string AddressLine1) {
+		_AddressLine1 = AddressLine1;
+	}
+
+	string GetAddressLine1() {
+		return _AddressLine1;
+	}
+
+	void SetAddressLine2(string AddressLine2) {
+		_AddressLine2 = AddressLine2;
+	}
+
+	string GetAddressLine2() {
+		return _AddressLine2;
+	}
+
+	void SetPOBox(string POBox) {
+		_POBox = POBox;
+	}
+
+	string GetPOBox() {
+		return _POBox;
+	}
+
+	void SetZipCode(string ZipCode) {
+		_ZIPCode = ZipCode;
+	}
+
+	string GetZipCode() {
+		return _ZIPCode;
+	}
+
+	void Print() {
+
+		cout << "\nAddress Details: \n";
+		cout << "-----------------------------";
+		cout << "\nAddressLine1 : " << _AddressLine1 << endl;
+		cout << "AddressLine2 : " << _AddressLine2 << endl;
+		cout << "POBox	     : " << _POBox << endl;
+		cout << "ZipCode	     : " << _ZIPCode << endl;
+
+	}
+};
+
+class ClsA {
+
+
+public:
+	int var;
+
+	static int counter;
+	ClsA()
+	{
+		counter++;
+	}
+	void Print() {
+
+		cout << "\nvar     =" << var << endl;
+		cout << "counter  =" << counter << endl;
+
+	}
+};
+
+int ClsA::counter = 0; //static variable initalisation outside the class.
 
 int main()
 {
-	Calculator Calc1;
+	ClsA a ,a1, a2;
 
-	Calc1.Clear();
-	Calc1.PrintResult();
+	a.var = 10;
+	a1.var = 20;
+	a2.var = 30;
+	
+	a.Print();
+	a1.Print();
+	a2.Print();
 
-	Calc1.Add(10);
-	Calc1.PrintResult();
+	/*a1.counter = 500;
+	cout << "\nAfter chaning the static memeber counter in one object: \n";
 
-	Calc1.Add(100);
-	Calc1.PrintResult();
-
-	Calc1.Subtract(20);
-	Calc1.PrintResult();
-
-
-	Calc1.Divide(0);
-	Calc1.PrintResult();
-
-	Calc1.Divide(2);
-	Calc1.PrintResult();
-
-	Calc1.Multiply(3);
-	Calc1.PrintResult();
-
-	Calc1.Clear();
-	Calc1.PrintResult();
-
-}
+	a.Print();
+	a1.Print();
+	a2.Print();*/
+	system("pause>0");
+};
 
