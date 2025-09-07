@@ -4,218 +4,249 @@ using namespace std;
 
 class Person {
 private:
-
+	short _userId;
 	string _firstName;
+	string _lastName;
+	string _email;
+	string _phoneNumber;
 
 public:
 
-	string fullName;
-
-	Person()
+	Person(short Id, string firstName, string lastName, string email, string phoneNumber)
 	{
-		fullName = "Mohammad Abu hammad ";
-		cout << "\nHi,I'm Ctor";
+		_userId = Id;
+		_firstName = firstName;
+		_lastName = lastName;
+		_email = email;
+		_phoneNumber = phoneNumber;
 	}
 
-	~Person() {
-		cout << "\nHi, I'm Destrouctor";
+	short getUserId() {
+
+		return _userId;
+
 	}
-	void setFirstName(string FirstName) {
 
-		_firstName = FirstName;
+	void setFirstName(string firstName) {
 
+		_firstName = firstName;
 	}
 
 	string getFirstName() {
-
 		return _firstName;
+	}
+
+	void setLastName(string lastName) {
+
+		_lastName = lastName;
 
 	}
 
-	__declspec(property(get = getFirstName, put = setFirstName)) string FirstName;
+	string getLastName() {
 
-};
-
-class Calculator {
-
-private:
-
-	float _result = 0;
-	float _lastNumber = 0;
-	string _lastOperation = "Clear";
-	float _preivousResult = 0;
-
-	bool _isZero(float num)
-	{
-		return (num == 0);
-	}
-
-public:
-
-	void Add(float num) {
-
-		_lastNumber = num;
-		_preivousResult = _result;
-		_lastOperation = "Adding";
-		_result += num;
+		return _lastName;
 
 	}
 
-	void Subtract(float num) {
-		_lastNumber = num;
-		_preivousResult = _result;
-		_lastOperation = "Subtracting";
-		_result -= num;
-	}
+	string getFullName() {
 
-	void Divide(float num) {
-
-		_lastNumber = num;
-
-		if (_isZero(num)) {
-			num = 1;
-		}
-		_preivousResult = _result;
-		_lastOperation = "Dividing";
-		_result /= num;
-
-	}
-	void Multiply(int num) {
-
-		_lastNumber = num;
-		_lastOperation = "Multiplying";
-		_preivousResult = _result;
-		_result *= num;
+		return _firstName + " " + _lastName;
 
 	}
 
-	float GetFinalReuslts() {
+	void setEmail(string email) {
 
-		return _result;
-
-	}
-
-	void Clear() {
-
-		_lastNumber = 0;
-		_preivousResult = 0;
-		_lastOperation = "Clear";
-		_result = 0;
+		_email = email;
 
 	}
 
-	void CancelLastOperation() {
+	string getEmail() {
 
-		_lastNumber = 0;
-		_lastOperation = "Cancelling Last Operation";
-		_result = _preivousResult;
+		return _email;
 
 	}
 
-	void PrintResult() {
+	void setPhoneNumber(string phoneNum) {
 
-		cout << "Result ";
-		cout << "After " << _lastOperation << " " << _lastNumber << " is : " << _result << "\n";
+		_phoneNumber = phoneNum;
+
 	}
 
-};
+	string getPhoneNumber() {
 
-class Address {
+		return _phoneNumber;
 
-private:
-	string _AddressLine1;
-	string _AddressLine2;
-	string _POBox;
-	string _ZIPCode;
-public:
-
-	Address(string AddressLine1, string AddressLine2, string POBox, string ZipCode)
-	{
-		_AddressLine1 = AddressLine1;
-		_AddressLine2 = AddressLine2;
-		_POBox = POBox;
-		_ZIPCode = ZipCode;
-	}
-	//Copy Constructor
-	/*Address(Address& old_obj)
-	{
-		_AddressLine1 = old_obj.GetAddressLine1();
-		_AddressLine2 = old_obj.GetAddressLine2();
-		_POBox = old_obj.GetPOBox();
-		_ZIPCode = old_obj.GetZipCode();
-	}*/
-
-	void SetAddressLin1(string AddressLine1) {
-		_AddressLine1 = AddressLine1;
-	}
-
-	string GetAddressLine1() {
-		return _AddressLine1;
-	}
-
-	void SetAddressLine2(string AddressLine2) {
-		_AddressLine2 = AddressLine2;
-	}
-
-	string GetAddressLine2() {
-		return _AddressLine2;
-	}
-
-	void SetPOBox(string POBox) {
-		_POBox = POBox;
-	}
-
-	string GetPOBox() {
-		return _POBox;
-	}
-
-	void SetZipCode(string ZipCode) {
-		_ZIPCode = ZipCode;
-	}
-
-	string GetZipCode() {
-		return _ZIPCode;
 	}
 
 	void Print() {
+		cout << "\nInfo :" << endl;
+		cout << "_____________________________" << endl;
+		cout << "User Id : " << _userId << endl;
+		cout << "First Name : " << _firstName << endl;
+		cout << "Last Name : " << _lastName << endl;
+		cout << "Full Name : " << _firstName << " " << _lastName << endl;
+		cout << "Email : " << _email << endl;
+		cout << "Phone Number : " << _phoneNumber << endl;
+		cout << "_____________________________";
+	}
 
-		cout << "\nAddress Details: \n";
-		cout << "-----------------------------";
-		cout << "\nAddressLine1 : " << _AddressLine1 << endl;
-		cout << "AddressLine2 : " << _AddressLine2 << endl;
-		cout << "POBox	     : " << _POBox << endl;
-		cout << "ZipCode	     : " << _ZIPCode << endl;
+	void sendEmail(string subject, string message) {
+
+		cout << "\n\nThe following message sent successfully to email :" << _email << endl;
+
+		cout << "Subject :" << subject << endl;
+		cout << "Body :" << message << endl;
 
 	}
+
+	void sendSMS(string message) {
+
+		cout << "\n\nThe following message sent successfully to Phone Number :" << _phoneNumber << endl;
+
+		cout << message << endl;
+
+	}
+
 };
 
-class ClsA {
+class Employee : public Person {
 
+private:
+	string _title;
+	float _salary;
+	string _department;
 
 public:
 
-	static int Funcation1() {
+	Employee(int Id, string firstName, string lastName, string email, string phone,
+		string title, string department, float salary)
+		: Person(Id, firstName, lastName, email, phone)
+	{
+		_title = title;
+		_department = department;
+		_salary = salary;
+	}
 
-		return 10;
+	void setTitle(string title) {
+		_title = title;
+	}
+
+	string getTitle() {
+		return _title;
+	}
+
+	void setSalary(float salary) {
+		_salary = salary;
+	}
+
+	float getSalary() {
+		return _salary;
+	}
+
+	void setDepartment(string department) {
+
+		_department = department;
 
 	}
 
-	int Funcation2() {
+	string getDepartment() {
+		return _department;
+	}
 
-		return 20;
+	void Print() {
+		cout << "\n--- Employee Information ---" << endl;
+		cout << "ID: " << getUserId() << endl;
+		cout << "Name: " << getFullName() << endl;
+		cout << "Email: " << getEmail() << endl;
+		cout << "Phone: " << getPhoneNumber() << endl;
+		cout << "Title: " << _title << endl;
+		cout << "Department: " << _department << endl;
+		cout << "Salary: " << _salary << endl;
+		cout << "----------------------------" << endl;
+	}
 
+
+};
+
+class Developer : public Employee {
+
+	string _mainProgrammingLanguage;
+
+public:
+
+	Developer(short Id, string firstName, string lastName, string email, string phone, string title, string department,
+		float salary, string mainProgrammingLanguage)
+		:Employee(Id, firstName, lastName, email, phone, title, department, salary)
+	{
+		_mainProgrammingLanguage = mainProgrammingLanguage;
+	}
+
+	void setMainProgrammingLanguage(string programmingLanguage) {
+
+		_mainProgrammingLanguage = programmingLanguage;
+
+	}
+
+	string getMainProgramminLanguage() {
+		return _mainProgrammingLanguage;
+	}
+
+	void Print()
+	{
+		cout << "\nInfo:";         cout << "\n___________________";
+		cout << "\nID        : " << getUserId();
+		cout << "\nFirstName : " << getFirstName();
+		cout << "\nLastName  : " << getLastName();
+		cout << "\nFull Name : " << getFullName();
+		cout << "\nEmail     : " << getEmail();
+		cout << "\nPhone     : " << getPhoneNumber();
+		cout << "\nTitle     : " << getTitle();
+		cout << "\nDepartment: " << getDepartment();
+		cout << "\nSalary    : " << getSalary();
+		cout << "\nPLanguage : " << getMainProgramminLanguage();
+		cout << "\n___________________\n";
 	}
 
 };
 
+class clsA
+{
+private:
+	int Var1;
+	void Fun1()
+	{
+		cout << "Function 1";
+	}
 
+protected:
+	int Var2;  // Now declared — accessible in derived classes
+	void Fun2()
+	{
+		cout << "Function 2";
+	}
+
+public:
+	// Accessible inside this class, all derived classes, and outside class
+	int Var3;
+	void Fun3()
+	{
+		cout << "Function 3";  // Fixed: probably meant Function 3
+	}
+};
+
+class clsB : public clsA  // Fixed spacing
+{
+public:
+	void Func1()
+	{
+		cout << clsA::Var2;  // Now valid — Var2 is protected in base class
+	}
+};
+
+ 
 int main()
 {
-	ClsA a, a1, a2;
 
-	cout << ClsA::Funcation1() << endl;
-
-	cout << a.Funcation1() << endl;
 
 	system("pause>0");
 };
