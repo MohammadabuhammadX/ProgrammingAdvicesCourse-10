@@ -2,13 +2,21 @@
 #include<string>
 using namespace std;
 
-class Person {
+class Person{
 private:
 	short _userId;
 	string _firstName;
 	string _lastName;
 	string _email;
 	string _phoneNumber;
+
+	struct stAddress
+	{
+		string AddressLine1;
+		string AddressLine2;
+		string City;
+		string Country;
+	};
 
 public:
 
@@ -106,6 +114,8 @@ public:
 		cout << message << endl;
 
 	}
+
+	stAddress Address;
 
 };
 
@@ -243,11 +253,141 @@ public:
 	}
 };
 
- 
+//Abstract class . Interface , Contract.
+class Mobile {
+
+public:
+
+	virtual void dial(string PhoneNumber) = 0;//converted to pure virtual funcation.
+
+	virtual void sendSMS(string phoneNumber,string text) = 0;
+	
+	virtual void takePicture() = 0;
+
+};
+
+class Phone :public Mobile {
+
+	void dial(string phoneNumber) {
+
+	};
+
+	void sendSMS(string phoneNumber, string text) {
+
+	};
+
+	void takePicture() {
+
+	}
+
+};
+
+class clsPerson
+{
+	string _FullName;
+
+	// Inner class: clsAddress
+	class clsAddress
+	{
+	private:
+		string _AddressLine1;
+		string _AddressLine2;
+		string _City;
+		string _Country;
+
+	public:
+		// Constructor
+		clsAddress(string AddressLine1, string AddressLine2, string City, string Country)
+		{
+			_AddressLine1 = AddressLine1;
+			_AddressLine2 = AddressLine2;
+			_City = City;
+			_Country = Country;
+		}
+
+		// Setters (Note: should return void, not string)
+		void setAddressLine1(string AddressLine1)
+		{
+			_AddressLine1 = AddressLine1;
+		}
+
+		void setAddressLine2(string AddressLine2)
+		{
+			_AddressLine2 = AddressLine2;
+		}
+
+		void setCity(string City)
+		{
+			_City = City;
+		}
+
+		void setCountry(string Country)
+		{
+			_Country = Country;
+		}
+
+		// Getters
+		string AddressLine1()
+		{
+			return _AddressLine1;
+		}
+
+		string AddressLine2()
+		{
+			return _AddressLine2;
+		}
+
+		string City()
+		{
+			return _City;
+		}
+
+		string Country()
+		{
+			return _Country;
+		}
+
+		// Print function
+		void Print()
+		{
+			cout << "\nAddress:\n";
+			cout << _AddressLine1 << endl;
+			cout << _AddressLine2 << endl;
+			cout << _City << endl;
+			cout << _Country << endl;
+		}
+	};
+
+public:
+	// Getter and Setter for FullName (should be void for setter)
+	void setFullName(string FullName)
+	{
+		_FullName = FullName;
+	}
+
+	string FullName()
+	{
+		return _FullName;
+	}
+
+	// Default-initialized Address object
+	clsAddress Address;
+
+	// Constructor for clsPerson
+	clsPerson(string FullName, string AddressLine1, string AddressLine2, string City, string Country)
+		: Address(AddressLine1, AddressLine2, City, Country) // Use member initializer list
+	{
+		_FullName = FullName;
+		// Address is already initialized via initializer list — no need to reassign
+	}
+};
+
 int main()
 {
-
+	clsPerson Person1("Mohammed Abu-Hadhoud", "Building 10", "Queen Rania Street", "Amman", "Jordan");
+	Person1.Address.Print();
 
 	system("pause>0");
-};
+	return 0;
+}
 
